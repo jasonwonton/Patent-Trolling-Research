@@ -1,0 +1,20 @@
+select left(ipc_class_symbol, 8) as ipc,
+datepart(year, appln_filing_date) as year, 
+datepart(quarter, appln_filing_date) as quarter, 
+count(*) as freq
+from tls201_appln a
+join tls209_appln_ipc i on a.appln_id = i.appln_id
+where appln_filing_date between '1999-01-01' and '2016-12-31'
+and left(ipc_class_symbol, 8) in (
+
+
+
+
+#insert IPCs here
+
+
+
+
+)
+group by left(ipc_class_symbol, 8), datepart(year, appln_filing_date), datepart(quarter, appln_filing_date)
+order by ipc, year, quarter
